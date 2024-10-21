@@ -8,7 +8,7 @@ It also handles parentheses and provides error messages for invalid input.
 
 ### Begin by installation:
     1. Clone or download the repository this can be accomplished by either using the git clone command or downloading the zip.
-    2. Navigate to the project directory (not yet existant so doesn't have a name yet)
+    2. Navigate to the project directory (not yet existent so doesn't have a name yet)
     3. Compile the program with the respective C++ compiler.
 
 Once the program is installed and configured properly you will be free to use the evaluator!
@@ -26,7 +26,7 @@ output: 20
 input: 1 / 0
 output: Error: Division by Zero
 
-### Ex 4) Exponentation:
+### Ex 4) Exponentiation:
 input: 2 ** 3
 output: 8
 
