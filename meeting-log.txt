@@ -13,6 +13,10 @@ MEETING log
 - assigned sections of this weeks document
 - rethought submission process to ensure everything is there
 
+10/20/24 - Software Requirements 2:
+- confirmed the document was filled out
+- pushed document to github
+
 .
 .
 .
