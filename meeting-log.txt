@@ -17,6 +17,15 @@ MEETING log
 - confirmed the document was filled out
 - pushed document to github
 
+11/05/24 - Software Architecture:
+- assigned sections of this weeks document
+- filled out and pushed document to github
+
+12/03/24 - Organize and create project:
+- create framework for the code
+- assign roles and establish deadlines
+
+
 .
 .
 .
