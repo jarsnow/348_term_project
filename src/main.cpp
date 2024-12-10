@@ -2,7 +2,6 @@
 #include <string>
 #include "evaluator.cpp"
 #include "expressionTree.cpp"
-#include "parser.cpp"
 #include "tokenizer.cpp"
 
 using namespace std;
@@ -33,7 +32,7 @@ int main() {
             vector<string> tokens = tokenizer.tokenize(expression); // will return the result of tokenizing the input expression as a string vector named tokens
 
             // Step 4: Parse the tokens into an expression tree
-            Parser parser; // Create instance of Parser class
+            ExpressionTree parser; // Create instance of Parser class
             ExpressionNode* expressionTree = parser.parse(tokens); // 
 
             // Step 5: Evaluate the expression tree
