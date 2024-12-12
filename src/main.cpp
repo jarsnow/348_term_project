@@ -32,6 +32,7 @@ int main() {
       vector<string> tokens;
       for (const auto& token : tokenize(expression)) {
         tokens.push_back(token.value);
+        cout << token.value << endl;
       }
       //vector<string> tokens = tokenize(expression); // will return the result of tokenizing the input expression as a string vector named tokens
 

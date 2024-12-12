@@ -45,6 +45,7 @@ F -> -F
 */
 
 #pragma once
+#include <iostream>
 
 class ExpressionTree {
     private:
@@ -54,14 +55,19 @@ class ExpressionTree {
 
         void update_next_token(){
             curr_token_index++;
-            curr_token = tokens[curr_token_index];
+            if (curr_token_index >= tokens.size()){
+              curr_token = "";
+            }else {
+              curr_token = tokens[curr_token_index];
+            }
+            cout << "new token: " << curr_token << endl;
         }
 
         bool is_string_number(string input){
             //  cool one liner
             //  if the function finds a value that isn't a digit, it returns string::npos
             //  so if it's anything other than those digits, it isn't string::npos
-            return curr_token.find_first_not_of( "0123456789" ) == string::npos;
+            return curr_token.find_first_not_of("0123456789") == string::npos;
         }
          
         ExpressionNode *parse_factor(){
@@ -69,6 +75,8 @@ class ExpressionTree {
             if (is_string_number(curr_token)){
                 NumberNode *curr_token_number = new NumberNode();
                 curr_token_number->number = stoi(curr_token);
+                // delete line below if not working
+                update_next_token();
                 return curr_token_number;
             }
                 
@@ -92,6 +100,7 @@ class ExpressionTree {
 
             // if there's a negation token, return the negated factor
             if (curr_token == "-"){
+                cout << "negation" << endl;
                 update_next_token();
                 return negation_node(parse_factor());
             }

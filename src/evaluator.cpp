@@ -18,14 +18,17 @@ public:
         }
 
         if (NumberNode* numberNode = dynamic_cast<NumberNode*>(node)) {
-            return numberNode->number;
+          cout << numberNode->number << endl;  
+          return numberNode->number;
         }
 
         if (OperatorNode* operatorNode = dynamic_cast<OperatorNode*>(node)) {
+            cout << "here!";
             double leftValue = evaluate(operatorNode->leftChild);
             double rightValue = evaluate(operatorNode->rightChild);
 
             switch (operatorNode->operation) {
+                case 'N': return -leftValue;
                 case '+': return leftValue + rightValue;
                 case '-': return leftValue - rightValue;
                 case '*': return leftValue * rightValue;
