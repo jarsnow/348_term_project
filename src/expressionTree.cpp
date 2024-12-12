@@ -44,6 +44,8 @@ F -> -F
 
 */
 
+#pragma once
+
 class ExpressionTree {
     private:
         vector<string> tokens;
