@@ -28,8 +28,13 @@ int main() {
         try { // to handle classes raising errors
 
             // Step 3: Tokenize the input expression
-            Tokenizer tokenizer; // Create instance of Tokenizer class
-            vector<string> tokens = tokenizer.tokenize(expression); // will return the result of tokenizing the input expression as a string vector named tokens
+            //tokenizer tokenize; // Create instance of Tokenizer class
+      vector<string> tokens;
+      for (const auto& token : tokenize(expression)) {
+        tokens.push_back(token.value);
+      }
+      //vector<string> tokens = tokenize(expression); // will return the result of tokenizing the input expression as a string vector named tokens
+
 
             // Step 4: Parse the tokens into an expression tree
             ExpressionTree parser; // Create instance of Parser class
