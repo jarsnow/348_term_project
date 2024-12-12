@@ -17,13 +17,11 @@ public:
             throw "Null node encountered in expression tree.";
         }
 
-        NumberNode* numberNode = dynamic_cast<NumberNode*>(node);
-        if (numberNode) {
+        if (NumberNode* numberNode = dynamic_cast<NumberNode*>(node)) {
             return numberNode->number;
         }
 
-        OperatorNode* operatorNode = dynamic_cast<OperatorNode*>(node);
-        if (operatorNode) {
+        if (OperatorNode* operatorNode = dynamic_cast<OperatorNode*>(node)) {
             double leftValue = evaluate(operatorNode->leftChild);
             double rightValue = evaluate(operatorNode->rightChild);
 
@@ -44,4 +42,3 @@ public:
         throw "Unknown node type encountered.";
     }
 };
-
