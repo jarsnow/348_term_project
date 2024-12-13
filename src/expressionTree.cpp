@@ -158,6 +158,11 @@ class ExpressionTree {
                     update_next_token();
                     ExpressionNode *factor_b = parse_factor();
                     factor_a = divide_nodes(factor_a, factor_b);
+                }else if (curr_token == "%"){
+                    // mod the next expression from the current one
+                    update_next_token();
+                    ExpressionNode *factor_b = parse_factor();
+                    factor_a = modulus_nodes(factor_a, factor_b);
                 }else{
                     // the F *F /F has stopped, return the expression
                     return factor_a;
@@ -216,6 +221,17 @@ class ExpressionTree {
             neg_node->operation = 'N'; // N for negate
             neg_node->leftChild = factor_node;
             return neg_node;
+        }
+
+        // returns the expression node of a modulus
+        // returns the root node with it's left and right child as two expression nodes
+        OperatorNode *modulus_nodes(ExpressionNode *factor_a, ExpressionNode *factor_b){
+            OperatorNode *mod_node = new OperatorNode();
+            mod_node->operation = '%';
+            mod_node->leftChild = factor_a;
+            mod_node->rightChild = factor_b;
+            
+            return mod_node;
         }
 
     public:
