@@ -121,7 +121,19 @@ class ExpressionTree {
             throw runtime_error("bad issue in parse_factor");
         }
 
-        
+        ExpressionNode *parse_exponentiation() { // code to parse exponents first
+            ExpressionNode *factor_a = parse_factor();
+
+            // Check for exponentiation operator "**"
+            while (curr_token == "**") {
+                update_next_token();
+                ExpressionNode *factor_b = parse_factor();
+                factor_a = exponent_nodes(factor_a, factor_b);
+            }
+
+            return factor_a; // go to other stuff
+        }
+                
         // expression
         ExpressionNode *parse_expression(){
             ExpressionNode *term_a = parse_term();
@@ -147,7 +159,7 @@ class ExpressionTree {
         }
 
         ExpressionNode *parse_term(){
-            ExpressionNode *factor_a = parse_factor();
+            ExpressionNode *factor_a = parse_exponentiation();
 
             // since a term can be followed by any number of +T or -T
             // continue to combine them to term_a node
@@ -156,23 +168,23 @@ class ExpressionTree {
                 if (curr_token == "*"){
                     // add the next expression to the current one
                     update_next_token();
-                    ExpressionNode *factor_b = parse_factor();
+                    ExpressionNode *factor_b = parse_exponentiation();
                     factor_a = multiply_nodes(factor_a, factor_b);
                 }else if (curr_token == "/"){
                     // divide the next expression from the current one
                     update_next_token();
-                    ExpressionNode *factor_b = parse_factor();
+                    ExpressionNode *factor_b = parse_exponentiation();
                     factor_a = divide_nodes(factor_a, factor_b);
                 }else if (curr_token =="**"){
                     //exponent
                     update_next_token();
-                    ExpressionNode *factor_b = parse_factor();
+                    ExpressionNode *factor_b = parse_exponentiation();
                     factor_a = exponent_nodes(factor_a, factor_b);
 
                 }else if (curr_token == "%"){
                     // mod the next expression from the current one
                     update_next_token();
-                    ExpressionNode *factor_b = parse_factor();
+                    ExpressionNode *factor_b = parse_exponentiation();
                     factor_a = modulus_nodes(factor_a, factor_b);
                 }else{
                     // the F *F /F has stopped, return the expression
