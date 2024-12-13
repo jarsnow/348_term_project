@@ -60,7 +60,7 @@ class ExpressionTree {
             }else {
               curr_token = tokens[curr_token_index];
             }
-            cout << "new token: " << curr_token << endl;
+            //cout << "new token: " << curr_token << endl;
         }
 
         bool is_string_number(string input){
@@ -100,7 +100,6 @@ class ExpressionTree {
 
             // if there's a negation token, return the negated factor
             if (curr_token == "-"){
-                cout << "negation" << endl;
                 update_next_token();
                 return negation_node(parse_factor());
             }

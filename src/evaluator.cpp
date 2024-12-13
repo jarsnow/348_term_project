@@ -18,12 +18,12 @@ public:
         }
 
         if (NumberNode* numberNode = dynamic_cast<NumberNode*>(node)) {
-          cout << numberNode->number << endl;  
+          //cout << numberNode->number << endl;  
           return numberNode->number;
         }
 
         if (OperatorNode* operatorNode = dynamic_cast<OperatorNode*>(node)) {
-            cout << "here!";
+            //cout << "here!";
             double leftValue = evaluate(operatorNode->leftChild);
             double rightValue = evaluate(operatorNode->rightChild);
 
