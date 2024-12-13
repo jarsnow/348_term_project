@@ -70,41 +70,53 @@ class ExpressionTree {
             return curr_token.find_first_not_of("0123456789") == string::npos;
         }
          
-        ExpressionNode *parse_factor(){
+        ExpressionNode* parse_factor() {
             // if the current token is an integer, return it
-            if (is_string_number(curr_token)){
-                NumberNode *curr_token_number = new NumberNode();
+            if (is_string_number(curr_token)) {
+                NumberNode* curr_token_number = new NumberNode();
                 curr_token_number->number = stoi(curr_token);
-                // delete line below if not working
                 update_next_token();
                 return curr_token_number;
             }
-                
-            // get the expression inside a parenthesis if there's a parenthesis coming up
-            if (curr_token == "("){
-                // go PAST the current open parenthesis, then scan the expression inside of it
+            
+            // check for negative number
+            if (curr_token == "-") {
                 update_next_token();
-                // assume there's a value past the '('
-                ExpressionNode *expression_in_parenthesis = parse_expression();
 
-                // closing
-                // the expression inside of the parenthesis has already been scanned
-                // assume that there is a
-                if (curr_token == ")"){
+                // check for parens
+                if (is_string_number(curr_token)) {
+                    NumberNode* curr_token_number = new NumberNode();
+                    curr_token_number->number = -stoi(curr_token);
+                    update_next_token(); 
+                    return curr_token_number;
+                } else if (curr_token == "(") {
+                    // negate expression i nparens
+                    update_next_token();
+                    ExpressionNode* expression_in_parenthesis = parse_expression();
+                    if (curr_token == ")") {
+                        update_next_token();
+                        return negation_node(expression_in_parenthesis);
+                    } else {
+                        throw runtime_error("bad ending parenthesis");
+                    }
+                }
+            }
+            
+            // get the expression inside a parenthesis if there's a parenthesis coming up
+            if (curr_token == "(") {
+                update_next_token();
+                ExpressionNode* expression_in_parenthesis = parse_expression();
+                if (curr_token == ")") {
                     update_next_token();
                     return expression_in_parenthesis;
-                }else{
+                } else {
                     throw runtime_error("bad ending parenthesis");
                 }
             }
 
-            // if there's a negation token, return the negated factor
-            if (curr_token == "-"){
-                update_next_token();
-                return negation_node(parse_factor());
-            }
-            throw runtime_error("bad issue in parse factor");
+            throw runtime_error("bad issue in parse_factor");
         }
+
         
         // expression
         ExpressionNode *parse_expression(){
