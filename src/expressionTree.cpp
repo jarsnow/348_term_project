@@ -71,6 +71,10 @@ class ExpressionTree {
         }
          
         ExpressionNode* parse_factor() {
+            if (curr_token == "+") {
+                update_next_token();
+                return parse_factor();
+            }
             // if the current token is an integer, return it
             if (is_string_number(curr_token)) {
                 NumberNode* curr_token_number = new NumberNode();
