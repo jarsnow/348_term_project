@@ -34,6 +34,7 @@ public:
                 case '-': return leftValue - rightValue;
                 case '*': return leftValue * rightValue;
                 case '%': return fmod(leftValue, rightValue);
+                case 'E': return pow(leftValue, rightValue);
                 case '/':
                     if (rightValue == 0) {
                         throw "Division by zero.";

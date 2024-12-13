@@ -152,6 +152,7 @@ class ExpressionTree {
             // since a term can be followed by any number of +T or -T
             // continue to combine them to term_a node
             while (true){
+                
                 if (curr_token == "*"){
                     // add the next expression to the current one
                     update_next_token();
@@ -162,6 +163,12 @@ class ExpressionTree {
                     update_next_token();
                     ExpressionNode *factor_b = parse_factor();
                     factor_a = divide_nodes(factor_a, factor_b);
+                }else if (curr_token =="**"){
+                    //exponent
+                    update_next_token();
+                    ExpressionNode *factor_b = parse_factor();
+                    factor_a = exponent_nodes(factor_a, factor_b);
+
                 }else if (curr_token == "%"){
                     // mod the next expression from the current one
                     update_next_token();
@@ -217,7 +224,18 @@ class ExpressionTree {
             
             return div_node;
         }
+        
+        
+        OperatorNode *exponent_nodes(ExpressionNode *factor_a, ExpressionNode *factor_b){
+            OperatorNode *exp_node = new OperatorNode();
+            exp_node->operation = 'E';
+            exp_node->leftChild = factor_a;
+            exp_node->rightChild = factor_b;
+            
+            return exp_node;
+        }
 
+        
         // returns the expression node of a negation
         // returns root node with its left child as an expression node
         OperatorNode *negation_node(ExpressionNode *factor_node){
